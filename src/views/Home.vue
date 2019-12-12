@@ -1,18 +1,19 @@
 <template>
 <div>
   <!-- <draw /> -->
-  <chat-box />
+  <!-- <chat-box /> -->
+  <chat />
 </div>
 </template>
 
 <script>
 // import Draw from '@/components/Draw.vue'
-import ChatBox from '@/components/ChatBox.vue'
+// import ChatBox from '@/components/ChatBox.vue'
 
 export default {
   name: 'home',
   components: {
-    ChatBox
+    // ChatBox
     // Draw
   }
 }
