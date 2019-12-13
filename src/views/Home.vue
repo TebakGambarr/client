@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style scoped>
+
 svg {
     display: block;
     font: 7em 'Montserrat';

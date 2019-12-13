@@ -3,27 +3,12 @@
     <div class="col-md-4 border-right">
       <div class="settings-tray">
         <h1>{{ room.name }}</h1>
-        <!-- <img class="profile-image" src="https://filiprastovic.com/wp-content/themes/filip-rastovic/assets/img/bootstrap-chat-app-assets/filip.jpg" alt="Profile img"> -->
-        <!-- <span class="settings-tray--right">
-          <i class="material-icons">cached</i>
-          <i class="material-icons">message</i>
-          <i class="material-icons">menu</i>
-        </span> -->
         <button class="btn" @click.prevent="startArena" :disabled="isDisabled">start play!</button>
       </div>
-      <div class="search-box">
-        <div class="input-wrapper">
-          <i class="fa fa-search">search</i>
-          <input placeholder="Search here" type="text">
-        </div>
-      </div>
       <div class="friend-drawer friend-drawer--onhover" v-for="(player, index) in room.players" :key="index">
-        <!-- <img class="profile-image" src="https://filiprastovic.com/wp-content/themes/filip-rastovic/assets/img/bootstrap-chat-app-assets/robocop.jpg" alt=""> -->
         <div class="text">
           <h6>{{ player }}</h6>
-          <!-- <p class="text-muted">Hey, you're arrested!</p> -->
         </div>
-        <!-- <span class="time text-muted small">13:21</span> -->
       </div>
       <hr>
     </div>
@@ -33,11 +18,7 @@
           <img class="profile-image" src="https://filiprastovic.com/wp-content/themes/filip-rastovic/assets/img/bootstrap-chat-app-assets/robocop.jpg" alt="">
           <div class="text">
             <h6>{{ username }}</h6>
-            <!-- <p class="text-muted">Layin' down the law since like before Christ...</p> -->
           </div>
-          <span class="settings-tray--right">
-            <button class="btn" @click.prevent="leaveRoom">leave room</button>
-          </span>
         </div>
       </div>
       <div class="chat-panel">
@@ -51,9 +32,7 @@
         <div class="row">
           <div class="col-12">
             <div class="chat-box-tray">
-              <!-- <i class="material-icons">sentiment_very_satisfied</i> -->
               <input type="text" placeholder="Type your message here..." v-model="message">
-              <!-- <i class="material-icons">mic</i> -->
               <button class="btn" @click.prevent="sendMessage"><i class="fa fa-paper-plane">send</i></button>
             </div>
           </div>
@@ -80,30 +59,24 @@ export default {
   },
   methods: {
     sendMessage: function () {
-      socket.emit('recieveMessage', {
+      socket.emit('receiveMessage', {
         room: this.room,
         username: this.username,
         message: this.message
       })
-      console.log(1)
-      this.temp.push({
-        username: this.username,
-        message: this.message
-      })
-      // console.log(this.temp)
-      this.message = ''
-      this.temp = []
     },
     publishMessage: function () {
-      socket.on('publishMessage', function (data) {
-      // console.log(4)
-        console.log('masuk publish')
+      socket.on('publishMessage', (data) => {
         this.chats.push(data)
+        this.message = ''
       })
     },
     startArena: function (room) {
       socket.emit('joinArena', this.room)
-      socket.on('connectToArena', () => {
+    },
+    joinArena () {
+      socket.on('connectToArena', (word) => {
+        this.$store.commit('SET_GAME_WORD', word)
         this.$router.push('/arena')
       })
     },
@@ -127,14 +100,9 @@ export default {
       }
     }
   },
-  // mounted: function () {
-
-  // },
-  watch: {
-    temp: function () {
-      console.log('masuk watch')
-      this.publishMessage()
-    }
+  mounted() {
+    this.publishMessage();
+    this.joinArena();
   }
 }
 </script>

@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/arena',
     name: 'arena',
-    component: () => import(/* webpackChunkName: "lobby" */ '../views/Arena.vue')
+    component: () => import(/* webpackChunkName: "arena" */ '../views/Arena.vue')
   }
 ]
 
