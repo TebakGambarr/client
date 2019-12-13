@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h3>The word you have to draw: {{word}}</h3>
+
+		<drawBoard />
+		
     <div class="row">
       <div class="col-4">
         <div class="flexbox">
@@ -42,6 +45,7 @@
       </div>
       <div class="col-8">
         ini game board
+	
       </div>
     </div>
   </div>
@@ -50,6 +54,7 @@
 <script>
 import { mapState } from 'vuex'
 import socket from '@/config/socket.js'
+import drawBoard from '@/components/board3.vue'
 // import chatBox from '@/components/ChatBox.vue'
 
 export default {
@@ -61,7 +66,8 @@ export default {
     }
   },
   components: {
-    // chatBox
+	// chatBox
+	drawBoard
   },
   methods: {
     sendMessage: function () {
