@@ -14,6 +14,17 @@ export default {
   components: {
     ChatBox
   }
+  // mounted: function () {
+  //   this.playSound('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3')
+  // },
+  // methods: {
+  //   playSound (sound) {
+  //     if(sound) {
+  //       var audio = new Audio(sound);
+  //       audio.play();
+  //     }
+  //   }
+  // }
 }
 </script>
 

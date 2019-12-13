@@ -45,7 +45,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal" @click.prevent="createRoom">Create</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" @click.prevent="createRoom(); playSound('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3');">Create</button>
 					</div>
 
 					</div>
@@ -85,6 +85,12 @@ export default {
         this.$store.commit('SET_ROOM', data)
         this.$router.push('/lobby')
       })
+    },
+    playSound (sound) {
+      if (sound) {
+        var audio = new Audio(sound)
+        audio.play()
+      }
     }
   },
   computed: {

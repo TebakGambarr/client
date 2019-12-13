@@ -1,14 +1,14 @@
 <template>
   <div class="row no-gutters">
+    <!-- <timer /> -->
     <div class="col-md-4 border-right">
       <div class="settings-tray">
-        <h1>{{ room.name }}</h1>
-        <button class="btn" @click.prevent="startArena" :disabled="isDisabled">start play!</button>
+        <h2>{{ room.name }}</h2>
       </div>
       <div class="friend-drawer friend-drawer--onhover" v-for="(player, index) in room.players" :key="index">
         <div class="text">
           <h6>{{ player }}</h6>
-        </div>
+       </div>
       </div>
       <hr>
     </div>
@@ -17,8 +17,11 @@
           <div class="friend-drawer no-gutters friend-drawer--grey">
           <img class="profile-image" src="https://filiprastovic.com/wp-content/themes/filip-rastovic/assets/img/bootstrap-chat-app-assets/robocop.jpg" alt="">
           <div class="text">
-            <h6>{{ username }}</h6>
+            <h5>{{ username }}</h5>
           </div>
+          <span class="settings-tray--right">
+            <button class="btn" @click.prevent="startArena(); playSound('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3');" :disabled="isDisabled">start play!</button>
+          </span>
         </div>
       </div>
       <div class="chat-panel">
@@ -33,16 +36,18 @@
           <div class="col-12">
             <div class="chat-box-tray">
               <input type="text" placeholder="Type your message here..." v-model="message">
-              <button class="btn" @click.prevent="sendMessage"><i class="fa fa-paper-plane">send</i></button>
+              <button class="btn" @click.prevent="sendMessage(); playSound('http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3');"><i class="fa fa-paper-plane">send</i></button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
+import Timer from '@/components/Timer.vue'
 import socket from '@/config/socket.js'
 import { mapState } from 'vuex'
 
@@ -53,8 +58,7 @@ export default {
       chats: [],
       temp: [],
       message: '',
-      username: '',
-      enoughPlayers: false
+      username: ''
     }
   },
   methods: {
@@ -85,6 +89,12 @@ export default {
       socket.on('backToHome', (data) => {
         this.$router.push('/')
       })
+    },
+    playSound (sound) {
+      if (sound) {
+        var audio = new Audio(sound)
+        audio.play()
+      }
     }
   },
   created: function () {
@@ -93,16 +103,19 @@ export default {
   computed: {
     ...mapState(['room']),
     isDisabled: function () {
-      if (this.room.players >= 2) {
-        return this.enoughPlayers = true
+      if (this.room.players.length >= 2) {
+        return false
       } else {
-        return this.enoughPlayers = false
+        return true
       }
     }
   },
-  mounted() {
-    this.publishMessage();
-    this.joinArena();
+  mounted () {
+    this.publishMessage()
+    this.joinArena()
+  },
+  components: {
+    Timer
   }
 }
 </script>
