@@ -19,15 +19,16 @@ export default {
 
 <style scoped>
 body {
-background-color: #3498db;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-text-rendering: optimizeLegibility;
+  background-color: #3498db;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 .container {
-margin: 60px auto;
-background: #fff;
-padding: 0;
-border-radius: 7px;
+  margin: 60px auto;
+  background: #fff;
+  padding: 0;
+  border-radius: 7px;
+  color: black;
 }
 </style>

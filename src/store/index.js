@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     username: null,
-    room: {}
+    room: {},
+    word: ''
   },
   mutations: {
     SET_USERNAME (state, payload) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     SET_ROOM (state, payload) {
       state.room = payload
+    },
+    SET_GAME_WORD(state, payload) {
+      state.word = payload
     }
   },
   actions: {
