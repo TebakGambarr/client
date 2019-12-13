@@ -1,19 +1,19 @@
 <template>
 <div>
-  <!-- <draw /> -->
+  <drawArena />
   <chat-box />
 </div>
 </template>
 
 <script>
-// import Draw from '@/components/Draw.vue'
 import ChatBox from '@/components/ChatBox.vue'
+import drawArena from '../components/board3'
 
 export default {
   name: 'home',
   components: {
-    ChatBox
-    // Draw
+    ChatBox,
+    drawArena
   }
 }
 </script>
