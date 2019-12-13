@@ -1,20 +1,26 @@
 <template>
-<div>
-  <!-- <draw /> -->
-  <!-- <chat-box /> -->
-  <chat />
-</div>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-9">
+        <NameForm />
+      </div>
+      <div class="col-3">
+        <RoomList />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-// import Draw from '@/components/Draw.vue'
-// import ChatBox from '@/components/ChatBox.vue'
+// @ is an alias to /src
+import RoomList from '@/components/RoomList.vue'
+import NameForm from '@/components/NameForm.vue'
 
 export default {
   name: 'home',
   components: {
-    // ChatBox
-    // Draw
+    RoomList,
+    NameForm
   }
 }
 </script>

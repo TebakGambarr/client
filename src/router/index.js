@@ -9,6 +9,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/lobby',
+    name: 'lobby',
+    component: () => import(/* webpackChunkName: "lobby" */ '../views/Lobby.vue')
+  },
+  {
+    path: '/arena',
+    name: 'arena',
+    component: () => import(/* webpackChunkName: "lobby" */ '../views/Arena.vue')
   }
 ]
 
