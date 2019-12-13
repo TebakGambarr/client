@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     submitUsername () {
+      localStorage.setItem('username', this.username)
       this.$store.commit('SET_USERNAME', this.username)
     },
     createRoom () {
