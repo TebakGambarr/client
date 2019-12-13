@@ -81,6 +81,8 @@ export default {
         password: this.password
       }
       socket.emit('createRoom', room, this.username)
+    },
+    connectToRoom () {
       socket.on('connectToNewRoom', (data) => {
         this.$store.commit('SET_ROOM', data)
         this.$router.push('/lobby')
@@ -91,6 +93,9 @@ export default {
     ...mapState({
       storeUsername: 'username'
     })
+  },
+  mounted () {
+	  this.connectToRoom()
   }
 }
 </script>

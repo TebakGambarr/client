@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     username: null,
     room: {},
-    word: ''
+    word: '',
+    gameRunning: {}
   },
   mutations: {
     SET_USERNAME (state, payload) {
@@ -16,8 +17,11 @@ export default new Vuex.Store({
     SET_ROOM (state, payload) {
       state.room = payload
     },
-    SET_GAME_WORD(state, payload) {
+    SET_GAME_WORD (state, payload) {
       state.word = payload
+    },
+    SET_GAME_OBJECT (state, payload) {
+      state.gameRunning = payload
     }
   },
   actions: {
