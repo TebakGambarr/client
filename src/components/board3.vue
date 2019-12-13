@@ -11,7 +11,7 @@
       <li id="tool-eraser" :class="{ active: selectedToolIdx === 1 }" @click="changeTool('#F9F9F9')">
        <img src="@/assets/eraser.svg"/>
       </li>
-      <li id="tool-color-palette" @click="showColorPalette()">
+      <li id="tool-color-palette" @click="clear()">
 
       </li>
     </ul>
@@ -19,7 +19,8 @@
 </template>
 
 <script>
-const socket = io.connect('http://localhost:3000')
+import socket from '@/config/socket.js'
+// const socket = io.connect('http://localhost:3000')
 
 export default {
   name: 'board3',
@@ -146,6 +147,9 @@ export default {
       var w = this.$refs.canvasWrapper.style.height = this.height
       var h = this.$refs.canvasWrapper.style.height = this.height
       this.drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color)
+    },
+    clear () {
+      this.canvasContext.clearRect(0, 0, this.$refs.canvasWrapper.style.height = this.height, this.$refs.canvasWrapper.style.height = this.height)
     }
   }
 }

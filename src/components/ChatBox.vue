@@ -3,7 +3,8 @@
     <div class="col-md-4 border-right">
       <div class="settings-tray">
         <h1>{{ room.name }}</h1>
-        <button class="btn" @click.prevent="startArena" :disabled="isDisabled">start play!</button>
+        <button class="btn" @click.prevent="startArena"
+        :disabled="isDisabled" v-if="room.players.length > 1">start play!</button>
       </div>
       <div class="friend-drawer friend-drawer--onhover" v-for="(player, index) in room.players" :key="index">
         <div class="text">
@@ -75,8 +76,9 @@ export default {
       socket.emit('joinArena', this.room)
     },
     joinArena () {
-      socket.on('connectToArena', (word) => {
+      socket.on('connectToArena', (word, gameObj) => {
         this.$store.commit('SET_GAME_WORD', word)
+        this.$store.commit('SET_GAME_OBJECT', gameObj)
         this.$router.push('/arena')
       })
     },
@@ -100,9 +102,9 @@ export default {
       }
     }
   },
-  mounted() {
-    this.publishMessage();
-    this.joinArena();
+  mounted () {
+    this.publishMessage()
+    this.joinArena()
   }
 }
 </script>
